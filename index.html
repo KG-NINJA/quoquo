@@ -16,6 +16,10 @@ h1 {
   color: #0ff;
   text-shadow: 0 0 10px #0ff;
 }
+p {
+  color: #8ff;
+  margin-bottom: 1em;
+}
 textarea {
   width: 90%;
   height: 200px;
@@ -36,6 +40,11 @@ button {
   font-size: 1rem;
   cursor: pointer;
   margin: 5px;
+  box-shadow: 0 0 10px #0ff;
+  transition: transform 0.2s;
+}
+button:hover {
+  transform: scale(1.05);
 }
 output {
   display: block;
@@ -47,6 +56,12 @@ output {
   margin-top: 10px;
   border-radius: 5px;
   border: 1px solid #0ff;
+  min-height: 100px;
+}
+footer {
+  margin-top: 2em;
+  color: #088;
+  font-size: 0.9rem;
 }
 </style>
 </head>
@@ -60,6 +75,10 @@ output {
 
 <output id="result"></output>
 
+<footer>
+  Made by <strong>#KGNINJA</strong> | Project <strong>#quoquo</strong>
+</footer>
+
 <script>
 const cleanBtn = document.getElementById("clean");
 const tweetBtn = document.getElementById("tweet");
@@ -68,12 +87,12 @@ const result = document.getElementById("result");
 cleanBtn.onclick = () => {
   const text = document.getElementById("input").value;
   const cleaned = text.replace(/["“”]/g, ""); // 全角・半角の"を削除
-  result.textContent = cleaned;
-  tweetBtn.style.display = "inline-block";
+  result.textContent = cleaned.trim();
+  tweetBtn.style.display = cleaned ? "inline-block" : "none";
 };
 
 tweetBtn.onclick = () => {
-  const msg = encodeURIComponent(result.textContent + "\\n#KGNINJA #quoquo");
+  const msg = encodeURIComponent(result.textContent + "\n#KGNINJA #quoquo");
   const url = `https://twitter.com/intent/tweet?text=${msg}`;
   window.open(url, "_blank");
 };
