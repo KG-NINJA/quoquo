@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>quoquo｜"削除ツール #KGNINJA</title>
+<style>
+body {
+  background: #000;
+  color: #0ff;
+  font-family: "Courier New", monospace;
+  text-align: center;
+  padding: 2em;
+}
+h1 {
+  color: #0ff;
+  text-shadow: 0 0 10px #0ff;
+}
+textarea {
+  width: 90%;
+  height: 200px;
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 1rem;
+  background: #111;
+  color: #0ff;
+  border: 1px solid #0ff;
+  border-radius: 5px;
+}
+button {
+  background: #0ff;
+  color: #000;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 5px;
+}
+output {
+  display: block;
+  background: #111;
+  color: #fff;
+  padding: 1em;
+  white-space: pre-wrap;
+  word-break: break-all;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px solid #0ff;
+}
+</style>
+</head>
+<body>
+<h1>quoquo："削除ツール</h1>
+<p>テキストから全角・半角の「"」をすべて消します。</p>
+
+<textarea id="input" placeholder="ここにテキストを貼り付け"></textarea><br>
+<button id="clean">消去する</button>
+<button id="tweet" style="display:none;">Tweet #KGNINJA #quoquo</button>
+
+<output id="result"></output>
+
+<script>
+const cleanBtn = document.getElementById("clean");
+const tweetBtn = document.getElementById("tweet");
+const result = document.getElementById("result");
+
+cleanBtn.onclick = () => {
+  const text = document.getElementById("input").value;
+  const cleaned = text.replace(/["“”]/g, ""); // 全角・半角の"を削除
+  result.textContent = cleaned;
+  tweetBtn.style.display = "inline-block";
+};
+
+tweetBtn.onclick = () => {
+  const msg = encodeURIComponent(result.textContent + "\\n#KGNINJA #quoquo");
+  const url = `https://twitter.com/intent/tweet?text=${msg}`;
+  window.open(url, "_blank");
+};
+</script>
+</body>
+</html>
